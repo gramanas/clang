@@ -1946,6 +1946,9 @@ void CodeGenFunction::EmitParmDecl(const VarDecl &D, ParamValue Arg,
     }
   }
 
+  // Set artificial debug location in order to preserve the scope
+  auto DL = ApplyDebugLocation::CreateArtificial(*this);
+
   Address DeclPtr = Address::invalid();
   bool DoStore = false;
   bool IsScalar = hasScalarEvaluationKind(Ty);
